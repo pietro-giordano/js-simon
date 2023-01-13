@@ -17,25 +17,33 @@ Consigli del giorno:
 */
 
 const play = document.getElementById('play');
-const numbers = document.getElementById('numbers');
 
 play.addEventListener('click',
       
       function() {
 
+            erase(results);
+
+            const numbers = document.getElementById('numbers');
             const randomNum = [];
-            randomFive(randomNum);
+            randomFive(randomNum, numbers);
 
-            setTimeout(eraseNum, 20000);
+            setTimeout(function() {
+                  erase(numbers);
+            }, 30000);
 
-            const userNum = [];
-            input(userNum);
+            setTimeout(function() {
 
-            const equalNum = [];
-            comparison(userNum, randomNum, equalNum);
+                  const userNum = [];
+                  input(userNum);
+      
+                  const equalNum = [];
+                  comparison(userNum, randomNum, equalNum);
+      
+                  const results = document.getElementById('results');
+                  finalRes(equalNum, results);
 
-            const results = document.getElementById('results');
-            finalRes(equalNum, results);
+            }, 30500);
 
       }
 
@@ -44,9 +52,9 @@ play.addEventListener('click',
 
 //---------------------------------------------------------------------------------------------------
 
-function randomFive(arr) {
+function randomFive(arr, elem) {
 
-      numbers.innerHTML = "";
+      elem.innerHTML = "";
 
       while(arr.length < 5) {
 
@@ -57,7 +65,7 @@ function randomFive(arr) {
                   arr.push(casualNum);
                   const newNum = document.createElement('div');
                   newNum.innerHTML = casualNum;
-                  numbers.append(newNum);
+                  elem.append(newNum);
 
             }
 
@@ -67,31 +75,35 @@ function randomFive(arr) {
 
 }
 
-function eraseNum() {
+function erase(elem) {
 
-      numbers.innerHTML = "";
+      elem.innerHTML = "";
 
 }
 
 function input(arr) {
 
-      for(let i = 1; i <= 5; i++) {
+      if(ok = true) {
 
-            const userInput = parseInt(prompt('Inserisci numero ' + i));
+            for (let i = 1; i <= 5; i++) {
 
-            if(isNaN(userInput) || userInput <= 0 || userInput > 20) {
+                  const userInput = parseInt(prompt('Inserisci numero ' + i));
 
-                  alert('Valore errato, riprova.');
-                  i--;
+                  if (isNaN(userInput) || userInput <= 0 || userInput > 20) {
 
-            } else if(arr.includes(userInput) == false) {
+                        alert('Valore errato, riprova.');
+                        i--;
 
-                  arr.push(userInput);
+                  } else if (arr.includes(userInput) == false) {
 
-            } else {
+                        arr.push(userInput);
 
-                  alert('Numero già inserito');
-                  i--;
+                  } else {
+
+                        alert('Numero già inserito');
+                        i--;
+
+                  }
 
             }
 
