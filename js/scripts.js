@@ -10,26 +10,31 @@ Consigli del giorno:
 
 1. Visualizzare 5 numeri casuali in pagina e salvarli in un array
 2. Dopo 30 secondi cancellarli
-3. Chiedere di inserire uno alla volta i 5 numeri visualizzati in precedenza
+3. Chiedere di inserire uno alla volta i 5 numeri visualizzati in precedenza e salvarli
 4. Confrontare i numeri inseriti con i 5 numeri casuali
 5. Visualizzare numero di numeri indovinati
 6. Visualizzare quelli indovinati
 */
 
 const play = document.getElementById('play');
+const numbers = document.getElementById('numbers');
 
 play.addEventListener('click',
       
       function() {
 
-            const numbers = document.getElementById('numbers');
             const randomNum = [];
-            randomFive(randomNum, numbers);
+            randomFive(randomNum);
 
-            setTimeout(eraseNum(numbers), 5000);
+            setTimeout(eraseNum, 5000);
 
             const userNum = [];
             input(userNum);
+
+            const equalNum = [];
+            comparison(userNum, randomNum, equalNum);
+
+            
 
       }
 
@@ -38,7 +43,7 @@ play.addEventListener('click',
 
 //---------------------------------------------------------------------------------------------------
 
-function randomFive(arr, elem) {
+function randomFive(arr) {
 
       numbers.innerHTML = "";
 
@@ -51,7 +56,7 @@ function randomFive(arr, elem) {
                   arr.push(casualNum);
                   const newNum = document.createElement('div');
                   newNum.innerHTML = casualNum;
-                  elem.append(newNum);
+                  numbers.append(newNum);
 
             }
 
@@ -61,9 +66,9 @@ function randomFive(arr, elem) {
 
 }
 
-function eraseNum(elem) {
+function eraseNum() {
 
-      elem.innerHTML = "";
+      numbers.innerHTML = "";
 
 }
 
@@ -93,4 +98,24 @@ function input(arr) {
 
       console.log(arr);
 
+}
+
+function comparison(arr1, arr2, arr3) {
+
+      for(let i = 0; i < 5; i++) {
+
+            for(let x = 0; x < 5; x++) {
+
+                  if(arr1[x] == arr2[i]) {
+
+                        arr3.push(arr1[x]);
+
+                  }
+
+            }
+
+      }
+
+      console.log(arr3);
+      
 }
