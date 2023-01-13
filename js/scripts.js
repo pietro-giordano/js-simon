@@ -26,7 +26,7 @@ play.addEventListener('click',
             const randomNum = [];
             randomFive(randomNum);
 
-            setTimeout(eraseNum, 5000);
+            setTimeout(eraseNum, 20000);
 
             const userNum = [];
             input(userNum);
@@ -34,7 +34,8 @@ play.addEventListener('click',
             const equalNum = [];
             comparison(userNum, randomNum, equalNum);
 
-            
+            const results = document.getElementById('results');
+            finalRes(equalNum, results);
 
       }
 
@@ -118,4 +119,14 @@ function comparison(arr1, arr2, arr3) {
 
       console.log(arr3);
       
+}
+
+function finalRes(arr, elem) {
+
+      if(arr.length > 0) {
+
+            elem.innerHTML = "Hai indovinato " + arr.length + " numeri che sono " + arr;
+
+      }
+
 }
